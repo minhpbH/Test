@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xin lỗi</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            animation: backgroundAnimation 5s infinite alternate;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #ffffff;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+            animation: bounce 1s infinite alternate, colorChange 3s infinite alternate;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            margin: 10px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+        }
+        #agree {
+            background: linear-gradient(45deg, #4CAF50, #66bb6a);
+            color: white;
+        }
+        #agree:hover {
+            background: linear-gradient(45deg, #388e3c, #43a047);
+            transform: scale(1.2);
+            box-shadow: 0px 5px 25px rgba(76, 175, 80, 0.5);
+        }
+        #disagree {
+            background: linear-gradient(45deg, #f44336, #e57373);
+            color: white;
+        }
+        #disagree:hover {
+            background: linear-gradient(45deg, #d32f2f, #e53935);
+            transform: scale(1.2) rotate(-10deg);
+            box-shadow: 0px 5px 25px rgba(244, 67, 54, 0.5);
+        }
+        #exit {
+            background: linear-gradient(45deg, #ff9800, #ffb74d);
+            color: white;
+        }
+        #exit:hover {
+            background: linear-gradient(45deg, #f57c00, #fb8c00);
+            transform: scale(1.2) rotate(10deg);
+            box-shadow: 0px 5px 25px rgba(255, 152, 0, 0.5);
+        }
+        .hidden {
+            display: none;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+        @keyframes colorChange {
+            0% { color: #ffffff; }
+            100% { color: #ffeb3b; }
+        }
+        @keyframes backgroundAnimation {
+            0% { background: linear-gradient(45deg, #ff9a9e, #fad0c4); }
+            100% { background: linear-gradient(45deg, #a18cd1, #fbc2eb); }
+        }
+    </style>
+</head>
+<body>
+    <h1 id="message">Tôi xin lỗi!</h1>
+    <button id="agree">Đồng ý</button>
+    <button id="disagree">Không đồng ý</button>
+    <button id="exit" class="hidden">Thoát</button>
+    
+    <script>
+        let count = 0;
+        const messages = [
+            "Bạn có chắc chắn không?",
+            "Nghĩ lại đi!",
+            "Thật sự không đồng ý sao?",
+            "Cho mình một cơ hội nữa nhé!",
+            "Bạn không muốn tha thứ sao?",
+            "Hãy suy nghĩ kỹ!",
+            "Mình biết bạn sẽ thay đổi ý mà!",
+            "Làm ơn đồng ý đi!",
+            "Bạn thật sự kiên định quá!",
+            "Còn một lần nữa thôi!"
+        ];
+        
+        document.getElementById("agree").addEventListener("click", function() {
+            alert("Cảm ơn bạn! 🎉");
+            location.reload();
+        });
+
+        document.getElementById("disagree").addEventListener("click", function() {
+            if (count < 9) {
+                this.textContent = messages[count];
+            } else {
+                this.classList.add("hidden");
+                document.getElementById("exit").classList.remove("hidden");
+            }
+            count++;
+        });
+
+        document.getElementById("exit").addEventListener("click", function() {
+            location.reload();
+        });
+
+        window.addEventListener("beforeunload", function (event) {
+            event.preventDefault();
+            event.returnValue = "Bạn có chắc muốn rời đi không?";
+        });
+    </script>
+</body>
+</html>
